@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import courses from '../src/data/courses';
 import testimonials from '../src/data/testimonials';
 
+
 function MainSection() {
   const [randomCourses, setRandomCourses] = useState([]);
   const [randomTestimonials, setRandomTestimonials] = useState([]);

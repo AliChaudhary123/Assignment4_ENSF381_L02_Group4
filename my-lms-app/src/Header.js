@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import logo from './images/logo.jpg'; 
+
 
 function Header() {
     // Define styles
@@ -33,7 +35,7 @@ function Header() {
     return (
         <header style={headerStyle}>
           <div className="logo">
-          <img src="logo.jpg" alt="LMS Logo" style={imgStyle} />
+          <img src={logo} alt="LMS Logo" style={imgStyle} />
           </div>
           <nav className="nav-links" style={navLinksStyle}>
             <Link to="/" style={linkStyle}>Home</Link>
