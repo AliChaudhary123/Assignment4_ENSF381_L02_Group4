@@ -16,7 +16,7 @@ function App() {
 
 export default App;
 
-//App.js
+//App.js when app was made, delete after everything is done
 /*
 
 import logo from './logo.svg';

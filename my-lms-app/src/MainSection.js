@@ -8,11 +8,9 @@ function MainSection() {
   const [randomTestimonials, setRandomTestimonials] = useState([]);
 
   useEffect(() => {
-    // Get 3 random courses
     const shuffledCourses = courses.sort(() => 0.5 - Math.random()).slice(0, 3);
     setRandomCourses(shuffledCourses);
 
-    // Get 2 random testimonials
     const shuffledTestimonials = testimonials.sort(() => 0.5 - Math.random()).slice(0, 2);
     setRandomTestimonials(shuffledTestimonials);
   }, []);
@@ -28,10 +26,12 @@ function MainSection() {
         <h2>Featured Courses</h2>
         <div className="course-list">
           {randomCourses.map((course) => (
-            <div key={course.id} className="course-card">
+            <div key={course.id} className="course-info">
               <img src={course.image} alt={course.name} />
               <h3>{course.name}</h3>
               <p>{course.instructor}</p>
+              <p>{course.description}</p>
+              <p>{course.duration}</p>
             </div>
           ))}
         </div>

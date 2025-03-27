@@ -9,8 +9,8 @@ const testimonials = [
     {
         studentName: "Bob Ross",
         courseName: "Software Testing",
-        review: "Really enjoyed learning how to test. The instructor was great!",
-        rating: 4
+        review: "I didn't like the structure of this course.",
+        rating: 2
     },
 
     {
@@ -24,7 +24,7 @@ const testimonials = [
         studentName: "Diana Evans",
         courseName: "Machine Learning",
         review: "Amazing course! Highly recommend for anyone interested in AI.",
-        rating: 5
+        rating: 4
     }
     
     ];
