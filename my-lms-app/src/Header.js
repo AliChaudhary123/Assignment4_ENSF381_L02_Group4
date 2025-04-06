@@ -41,6 +41,7 @@ function Header() {
             <Link to="/" style={linkStyle}>Home</Link>
             <Link to="/courses" style={linkStyle}>Courses</Link>
             <Link to="/login" style={linkStyle}>Login</Link>
+            <Link to= "/signup" style = {linkStyle}>Sign Up</Link>
           </nav>
         </header>
     );
