@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import './RegForm.css'; // Import the CSS for styling
+import './RegForm.css'; 
 
 function RegForm() {
   const navigate = useNavigate();
@@ -36,12 +36,39 @@ function RegForm() {
     return newErrors.length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      // Replace with actual API call
-      console.log('Sending data to backend:', formData);
-      navigate('/login');
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload on form submission
+
+    if (!validate()) {
+      return; // Don't submit if validation fails
+    }
+
+    const backendEndpoint = 'http://127.0.0.1:5000';
+
+    try {
+      const response = await fetch(backendEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+          email: formData.email
+        }), // Converts JavaScript object into JSON
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        navigate('/login'); // Redirect to Login page on success
+      } else {
+        console.error('Form submission failed.');
+        const errorData = await response.json(); // Get error message from backend if needed
+        setErrors([errorData.message || 'Signup failed. Please try again later.']);
+      }
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      setErrors(['An error occurred while submitting the form. Please try again later.']);
     }
   };
 
@@ -53,11 +80,9 @@ function RegForm() {
   };
 
   return (
- 
     <div className="formContainer">
-         <h1 className="title">Sign Up</h1> 
+      <h1 className="title">Sign Up</h1> 
       <form onSubmit={handleSubmit} className="form">
-
         <div className="inputContainer">
           <label className="label">Username:</label>
           <input
@@ -114,14 +139,12 @@ function RegForm() {
           ))}
         </div>
       )}
-      <div className = "LoginLinkContainer">
+      <div className="LoginLinkContainer">
         <Link to="/login" className="loginLink">
-            Already have an account? Login here
+          Already have an account? Login here
         </Link>
-        
       </div>
     </div>
-    
   );
 }
 
