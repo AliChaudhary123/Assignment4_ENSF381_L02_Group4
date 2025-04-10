@@ -1,17 +1,7 @@
 import EnrolledCourse from "./EnrolledCourse";
 
-export default function EnrollmentList({
-  enrolledCourses,
-  setEnrolledCourses,
-  onDropCourse,
-}) {
+export default function EnrollmentList({ enrolledCourses }) {
   let totalHours = 0;
-
-  console.log(enrolledCourses);
-
-  for (let key in enrolledCourses) {
-    totalHours += 3;
-  }
 
   return (
     <div>
@@ -20,7 +10,6 @@ export default function EnrollmentList({
         <EnrolledCourse
           courseName={course.courseName}
           creditHours={course.creditHours}
-          onDropCourse={onDropCourse}
         />
       ))}
       <h1>Total Hours: {totalHours}</h1>

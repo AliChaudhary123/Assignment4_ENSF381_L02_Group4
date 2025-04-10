@@ -5,7 +5,7 @@
     "instructor": "Dr. John Smith",
     "description": "Master HTML, CSS, and JavaScript.",
     "duration": "8 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "instructor": "Dr. Alex Johnson",
     "description": "Machine Learning Practices.",
     "duration": "8 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "instructor": "Dr. Michael Smith",
     "description": "Understand data analysis, visualization, and machine learning.",
     "duration": "10 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "instructor": "Dr. Olivia Brown",
     "description": "Test cases in software development.",
     "duration": "8 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "instructor": "Dr. William Hague",
     "description": "Introduction to database system models.",
     "duration": "12 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "instructor": "Dr. Emily Fred",
     "description": "Learn the fundamentals of calculus 2.",
     "duration": "6 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "instructor": "Dr. Jack Black",
     "description": "Learn complexities of software implementations.",
     "duration": "8 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "instructor": "Dr. Josh Martin",
     "description": "Learn statistics and probability methods.",
     "duration": "10 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "instructor": "Dr. Dannielle Hunt",
     "description": "Learn the architecture of Software",
     "duration": "8 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   },
   {
     "id": 10,
@@ -77,6 +77,6 @@
     "instructor": "Dr. James Pink",
     "description": "Understand the basics of cybersecurity and protection techniques.",
     "duration": "10 weeks",
-    "image": "course1.jpg"
+    "image": "/static/images/course1.jpg"
   }
 ]

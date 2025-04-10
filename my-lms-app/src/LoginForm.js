@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import AuthMessage from "./AuthMessage";
@@ -9,78 +9,48 @@ export const AuthContext = createContext();
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
-  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  const validateCreds = () => {
-    if (!username || !password) {
-      setStatus({
-        type: "error",
-        message: "Username and Password cannot be empty",
+  function handleAuthentication() {
+    fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, password: password }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error("Invalid username or password");
+        }
+      })
+      .then((response) => {
+        setAuthenticated(true);
+        setStatus({ type: "success", message: "Authentication successful" });
+      })
+      .catch((error) => {
+        setAuthenticated(false);
+        setStatus({
+          type: "error",
+          message: error.message || "Authentication Failed. Invalid Creds",
+        });
       });
-      return false;
-    }
-    if (password.length < 8) {
-      setStatus({
-        type: "error",
-        message: "Password must be at least 8 characters long",
-      });
-      return false;
-    }
-    setStatus({
-      type: "success",
-      message: "Login successful!",
-    });
-    return true;
-  };
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validateCreds()) {
-      const user = users.find(
-        (user) => user.username === username && user.email === password
-      );
-      if (user) {
-        console.log("Login successful");
-      } else {
-        setStatus({ type: "error", message: "Invalid username or password." });
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (status.type === "success") {
-      const timer = setTimeout(() => {
-        navigate("/courses");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [status, navigate]);
+  if (authenticated) {
+    navigate("/courses");
+  }
 
   return (
     <div>
       <div>
         <Header />
         <h2>LMS Login</h2>
-        <AuthContext.Provider value={{ username, password, status }}>
+        <AuthContext.Provider value={{ username, password, status, id }}>
           <form>
             <label for="username">Username:</label>
             <input
@@ -105,7 +75,7 @@ export default function LoginForm() {
           </form>
           <br />
           <br />
-          <button onClick={handleSubmit}>Login</button> <br />
+          <button onClick={handleAuthentication}>Login</button> <br />
           <br />
           <a href="">Forgot Password?</a>
           <AuthMessage />

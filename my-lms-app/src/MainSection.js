@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import courses from '../src/data/courses';
-import testimonials from '../src/data/testimonials';
-
+import React, { useState, useEffect } from "react";
 
 function MainSection() {
   const [randomCourses, setRandomCourses] = useState([]);
   const [randomTestimonials, setRandomTestimonials] = useState([]);
 
   useEffect(() => {
-    const shuffledCourses = courses.sort(() => 0.5 - Math.random()).slice(0, 3);
-    setRandomCourses(shuffledCourses);
-
-    const shuffledTestimonials = testimonials.sort(() => 0.5 - Math.random()).slice(0, 2);
-    setRandomTestimonials(shuffledTestimonials);
+    fetch("http://127.0.0.1:5000/testimonials")
+      .then((response) => response.json())
+      .then((data) => {
+        setRandomTestimonials(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching testimonials:", error);
+      });
   }, []);
 
   return (
     <main>
       <section className="about-lms">
         <h2>About LMS</h2>
-        <p>Our Learning Management System (LMS) helps you access a variety of courses to enhance your skills.</p>
+        <p>
+          Our Learning Management System (LMS) helps you access a variety of
+          courses to enhance your skills.
+        </p>
       </section>
 
       <section className="featured-courses">
@@ -41,9 +44,15 @@ function MainSection() {
         <h2>Testimonials</h2>
         {randomTestimonials.map((testimonial, index) => (
           <div key={index} className="testimonial">
-            <p><strong>{testimonial.studentName}</strong> took the <em>{testimonial.courseName}</em> course.</p>
+            <p>
+              <strong>{testimonial.studentName}</strong> took the{" "}
+              <em>{testimonial.courseName}</em> course.
+            </p>
             <p>{testimonial.review}</p>
-            <p>{"★".repeat(testimonial.rating)}{"☆".repeat(5 - testimonial.rating)}</p>
+            <p>
+              {"★".repeat(testimonial.rating)}
+              {"☆".repeat(5 - testimonial.rating)}
+            </p>
           </div>
         ))}
       </section>
