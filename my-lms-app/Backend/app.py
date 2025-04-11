@@ -19,8 +19,8 @@ CORS(app)
 students = [
     {
         "id": 1,
-        "username": "alice",
-        "password": "password123",
+        "username": "alice123",
+        "password": "@Password123",
         "email": "alicej2@gmail.com",
         "enrolled_courses": ["Web Development", "Machine Learning"]
 
@@ -28,8 +28,8 @@ students = [
     },
     {
         "id": 2,
-        "username": "bob",
-        "password": "tiger123",
+        "username": "bobT1",
+        "password": "@Tiger12345",
         "email": "bobr123@gmail.com",
         "enrolled_courses": ["Data Science", "Software Testing"]
     }
@@ -63,12 +63,14 @@ def login():
     username = data.get('username')
     password = data.get('password')
     valid = False
+    student_id = None
 
     for student in students:
         if student['username'] == username and student['password'] == password:
             valid = True
+            student_id = student['id']
     if valid:
-        return jsonify({'message': 'Valid username and password'}), 200
+        return jsonify({'message': 'Valid username and password', 'id': student_id}), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
@@ -77,7 +79,7 @@ def enroll_course(student_id):
     course_data = request.get_json()
     student = None
     for s in students:
-        if s == student_id:
+        if s['id'] == student_id:
             student = s
     if student == None:
         return jsonify({"error": "Student not found"}), 404
@@ -93,7 +95,7 @@ def drop_course(student_id):
 
     student = None
     for s in students:
-        if s == student_id:
+        if s['id']== student_id:
             student = s
     if student == None:
         return jsonify({"error": "Student not found"}), 404

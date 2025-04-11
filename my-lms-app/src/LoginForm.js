@@ -30,7 +30,9 @@ export default function LoginForm() {
       })
       .then((response) => {
         setAuthenticated(true);
+        localStorage.setItem("studentId", response.id); // Store ID
         setStatus({ type: "success", message: "Authentication successful" });
+        navigate("/courses"); // Redirect after authentication
       })
       .catch((error) => {
         setAuthenticated(false);
@@ -41,48 +43,42 @@ export default function LoginForm() {
       });
   }
 
-  if (authenticated) {
-    navigate("/courses");
-  }
-
   return (
     <div>
-      <div>
-        <Header />
-        <h2>LMS Login</h2>
-        <AuthContext.Provider value={{ username, password, status, id }}>
-          <form>
-            <label for="username">Username:</label>
-            <input
-              required
-              type="text"
-              id="username"
-              name="username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <br />
-            <br />
+      <Header />
+      <h2>LMS Login</h2>
+      <AuthContext.Provider value={{ username, password, status }}>
+        <form>
+          <label htmlFor="username">Username:</label>
+          <input
+            required
+            type="text"
+            id="username"
+            name="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <br />
+          <br />
 
-            <label for="password">Password:</label>
-            <input
-              required
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <br />
-          </form>
+          <label htmlFor="password">Password:</label>
+          <input
+            required
+            type="password"
+            id="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <br />
-          <br />
-          <button onClick={handleAuthentication}>Login</button> <br />
-          <br />
-          <a href="">Forgot Password?</a>
-          <AuthMessage />
-        </AuthContext.Provider>
+        </form>
         <br />
-        <Footer />
-      </div>
+        <br />
+        <button onClick={handleAuthentication}>Login</button>
+        <br />
+        <br />
+        <a href="">Forgot Password?</a>
+        <AuthMessage />
+      </AuthContext.Provider>
+      <Footer />
     </div>
   );
 }
